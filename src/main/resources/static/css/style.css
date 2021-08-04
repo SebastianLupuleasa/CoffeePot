@@ -1,0 +1,76 @@
+body, html {
+    height: 100%;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .bg-image {
+    /* The image used */
+    background-image: url("../images/backgroundImage.jpg");
+  
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* Position text in the middle of the page/image */
+  .bg-text {
+   
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 90%;
+    padding: 20px;
+    text-align: center;
+  }
+
+.flex-menu{
+    display:flex;
+    overflow: auto;
+    margin: 5%;
+    margin-left: 9%;
+    margin-top: 3%;
+}
+
+.flex-menu .p-2 {
+    margin:0 5%;
+    background-color: rgba(161, 159, 159, 0.4);
+    border: 4px solid black;
+}
+.flex-menu .card {
+  
+    border:none;
+    color: goldenrod;
+    background-color:rgba(161, 159, 159, 0);
+    
+}
+
+  .bg-text img {
+    
+       border-radius: 35%;
+        margin-top: 3%;
+
+   
+  }
+
+  .flex-menu img {
+    border-radius: 50%;
+    border:2px solid goldenrod;
+    margin-top: 0%;
+}
