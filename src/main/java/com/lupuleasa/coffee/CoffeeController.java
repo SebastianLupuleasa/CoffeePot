@@ -1,13 +1,16 @@
 package com.lupuleasa.coffee;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CoffeeController {
 
-    @RequestMapping("")
+    @GetMapping("")
     public ModelAndView home()
     {
        ModelAndView mv = new ModelAndView();
@@ -16,7 +19,19 @@ public class CoffeeController {
        return mv;
     }
 
-    @RequestMapping("/menu")
+    @GetMapping("/user")
+    public String user()
+    {
+        return "custom";
+    }
+
+    @GetMapping("/admin")
+    public String admin()
+    {
+        return "menu";
+    }
+
+    @GetMapping("/menu")
     public ModelAndView menu()
     {
         ModelAndView mv = new ModelAndView();
@@ -25,7 +40,7 @@ public class CoffeeController {
         return mv;
     }
 
-    @RequestMapping("/custom")
+    @GetMapping("/custom")
     public ModelAndView custom()
     {
         ModelAndView mv = new ModelAndView();
@@ -34,7 +49,7 @@ public class CoffeeController {
         return mv;
     }
 
-    @RequestMapping("/orders")
+    @GetMapping("/orders")
     public ModelAndView orders()
     {
         ModelAndView mv = new ModelAndView();
@@ -42,5 +57,19 @@ public class CoffeeController {
 
         return mv;
     }
+
+    @GetMapping("/logout")
+    public ModelAndView logout()
+    {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("");
+
+        SecurityContextHolder.getContext().setAuthentication(null);
+
+        return mv;
+    }
+
+
+
 
 }

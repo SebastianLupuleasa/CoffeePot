@@ -46,5 +46,11 @@
         </div></div>
     </div>
 </div>
+
+<br>
+<form action="logout">
+    <input type="submit" value="logout">
+</form>
 </body>
 </html>
+
