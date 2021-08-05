@@ -9,16 +9,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyUserDetails implements UserDetails {
+public class MyCustomerDetails implements UserDetails {
 
     private String userName;
     private String password;
     private List<GrantedAuthority> authorities;
 
-    public MyUserDetails(User user){
-        this.userName = user.getUserName();
-        this.password = user.getPassword();
-        this.authorities = Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    public MyCustomerDetails(Customer customer){
+        this.userName = customer.getUserName();
+        this.password = customer.getPassword();
+        this.authorities = Arrays.stream(customer.getRoles().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
