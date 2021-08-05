@@ -12,7 +12,7 @@ public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
 
     @ManyToOne
     private Customer customer;
@@ -20,7 +20,7 @@ public class Purchase {
     @ManyToMany
     private List<Coffee> coffees;
 
-    private int amount;
+    private float amount;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,11 +28,11 @@ public class Purchase {
     private Date createDate;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public Customer getCustomer() {
@@ -51,7 +51,7 @@ public class Purchase {
         this.coffees = coffees;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
@@ -67,14 +67,8 @@ public class Purchase {
         this.createDate = createDate;
     }
 
-    @Override
-    public String toString() {
-        return "Purchase{" +
-                "Id=" + Id +
-                ", customer=" + customer +
-                ", coffee=" + coffees +
-                ", amount=" + amount +
-                ", createDate=" + createDate +
-                '}';
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
+
 }

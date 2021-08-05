@@ -15,7 +15,16 @@
 
 <div class="bg-text">
 
+
+    <form action="logout">
+        <input type="submit" class="btn btn-danger logoutBtn" value="Logout">
+    </form>
+    <br>
+    <br>
+    <br>
+
     <img src="images/home-logo.png" alt=""/>
+
 
     <div class="flex-menu">
         <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
@@ -47,10 +56,8 @@
     </div>
 </div>
 
-<br>
-<form action="logout">
-    <input type="submit" value="logout">
-</form>
 </body>
 </html>
+
+
 

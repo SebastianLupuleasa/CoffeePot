@@ -10,18 +10,18 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
     private String name;
 
     @ManyToMany
     private List<Ingredient> ingredients;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -40,12 +40,5 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "Id=" + Id +
-                ", name='" + name + '\'' +
-                ", ingredients=" + ingredients +
-                '}';
-    }
+
 }

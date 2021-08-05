@@ -8,16 +8,16 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
     private String streetName;
     private int buildingNumber;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getStreetName() {
@@ -36,12 +36,4 @@ public class Address {
         this.buildingNumber = buildingNumber;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" +
-                "Id=" + Id +
-                ", streetName='" + streetName + '\'' +
-                ", buildingNumber=" + buildingNumber +
-                '}';
-    }
-}
+   }

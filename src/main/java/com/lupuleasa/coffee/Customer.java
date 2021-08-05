@@ -11,7 +11,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
     private String userName;
     private String password;
     private String roles;
@@ -35,11 +35,11 @@ public class Customer {
     private Address address;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUserName() {
@@ -90,17 +90,6 @@ public class Customer {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "Id=" + Id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", roles='" + roles + '\'' +
-                ", custom_coffees=" + custom_coffees +
-                ", purchases=" + purchases +
-                ", address=" + address +
-                '}';
-    }
+
 }
 

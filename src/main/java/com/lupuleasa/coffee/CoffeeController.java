@@ -1,16 +1,25 @@
 package com.lupuleasa.coffee;
 
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
 public class CoffeeController {
 
+    @Autowired
+    CoffeeRepository coffeRepo;
 
     @GetMapping("")
     public ModelAndView home()
@@ -37,10 +46,12 @@ public class CoffeeController {
     @GetMapping("/menu")
     public ModelAndView menu()
     {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("menu");
 
-        return mv;
+       ModelAndView mv = new ModelAndView("menu");
+
+       mv.addObject("coffeeList",coffeRepo.findByIdIsLessThan(5));
+
+       return mv;
     }
 
     @GetMapping("/custom")

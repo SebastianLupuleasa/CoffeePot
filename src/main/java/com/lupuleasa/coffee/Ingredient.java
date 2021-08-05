@@ -9,9 +9,9 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
     private String name;
-    private int price;
+    private float price;
 
     public List<Recipe> getRecipes() {
         return recipes;
@@ -25,11 +25,11 @@ public class Ingredient {
     private List<Recipe> recipes;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -40,21 +40,17 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Ingredient{" +
-                "Id=" + Id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", recipes=" + recipes +
-                '}';
-    }
+
 }

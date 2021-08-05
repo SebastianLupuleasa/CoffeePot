@@ -9,15 +9,25 @@ public class Coffee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
     private String name;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id", referencedColumnName = "Id")
     private Recipe recipe;
 
+    private String description;
+
     @ManyToOne
     private Customer customer;
+
+    private String imagePath;
+
+    private float price;
+
+    @ManyToMany(mappedBy = "coffees")
+    private List<Purchase> purchases;
 
     public Customer getCustomer() {
         return customer;
@@ -43,19 +53,21 @@ public class Coffee {
         this.imagePath = imagePath;
     }
 
-    @ManyToMany(mappedBy = "coffees")
-    private List<Purchase> purchases;
 
-    private String imagePath;
+    public String getDescription() {
+        return description;
+    }
 
-    private int price;
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -74,24 +86,17 @@ public class Coffee {
         this.recipe = recipe;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Coffee{" +
-                "Id=" + Id +
-                ", name='" + name + '\'' +
-                ", recipe=" + recipe +
-                ", customer=" + customer +
-                ", purchases=" + purchases +
-                ", imagePath='" + imagePath + '\'' +
-                ", price=" + price +
-                '}';
-    }
+
 }
