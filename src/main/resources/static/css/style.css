@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    overflow: hidden;
 }
 
 * {
@@ -31,7 +32,7 @@ body, html {
     font-weight: bold;
     border: 3px solid #f1f1f1;
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -43,11 +44,15 @@ body, html {
 .logoutBtn {
     float:right;
     margin-right: 5%;
-    margin-top: 2%;
+    margin-top: 5%;
     font-size: larger;
     border-radius: 35%;
     border: 2px solid goldenrod;
     color: yellow;
+}
+
+.logo{
+    margin-left: 13%;
 }
 
 .row {
@@ -111,4 +116,21 @@ label input {
     border-radius: 50%;
     border:2px solid goldenrod;
     margin-top: 0%;
+}
+
+#customCoffee .rightInput {
+    width: 50%;
+    margin:2%;
+    margin-left: 25%;
+}
+
+.submitCustom {
+    margin-right: 3%;
+    margin-bottom: 5%;
+}
+
+.createCoffee {
+
+    margin-left: 65%;
+
 }

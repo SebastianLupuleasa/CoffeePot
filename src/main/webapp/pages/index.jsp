@@ -23,7 +23,7 @@
     <br>
     <br>
 
-    <img src="images/home-logo.png" alt=""/>
+    <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
 
 
     <div class="flex-menu">
@@ -44,6 +44,16 @@
                 <a href="/custom" class="btn btn-warning">Customise</a>
             </div>
         </div></div>
+
+        <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="images/shoppingCart.png" width="150px" height="150px" alt="Order">
+            <div class="card-body ">
+                <h5 class="card-title">ShoppingCart</h5>
+                <p class="card-text">check your cart and finish buying</p>
+                <a href="/cart" class="btn btn-warning">Finish</a>
+            </div>
+        </div></div>
+
 
         <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
             <img class="card-img-top" src="images/orders-logo.png" width="150px" height="150px" alt="Order">

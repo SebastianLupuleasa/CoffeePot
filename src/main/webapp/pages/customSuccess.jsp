@@ -1,6 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -28,11 +25,16 @@
     <br>
     <br>
 
-    <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
+    <img src="images/home-logo.png" onclick="location.href = 'http://localhost:8080';" alt=""/>
    
-    <button type="button" onclick="location.href = 'http://localhost:8080/addCustom';" class="btn btn-success createCoffee">Create Coffee</button>
-
-
+    <br>
+    <br>
+    <br>
+    <h1 style="color: green;">Your custom coffee has been created!</h1>
+    <br>
+    <br>
+    <br>
+    
 </div>
 
 </body>

@@ -13,6 +13,7 @@ public class Ingredient {
     private String name;
     private float price;
 
+
     public List<Recipe> getRecipes() {
         return recipes;
     }

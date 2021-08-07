@@ -19,3 +19,14 @@ function changeIngredientsColor(element,price){
 
 }
 
+$(document).ready(function () {
+    $('#submitCustomBtn').click(function() {
+       let checked = $("input[type=checkbox]:checked").length;
+
+        if(!checked) {
+            alert("You must add at least one ingredient.");
+            return false;
+        }
+
+    });
+});

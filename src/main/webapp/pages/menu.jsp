@@ -25,7 +25,7 @@
     <br>
     <br>
 
-    <img src="images/home-logo.png" alt=""/>
+    <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
 
     <div class="flex-menu">
  <c:forEach items="${coffeeList}" var="coffee">

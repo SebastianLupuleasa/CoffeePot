@@ -5,10 +5,7 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -62,9 +59,32 @@ public class CoffeeController {
     {
         ModelAndView mv = new ModelAndView("custom");
 
+
+        return mv;
+    }
+
+    @GetMapping("addCustom")
+    public ModelAndView addCustom()
+    {
+        ModelAndView mv = new ModelAndView("addCustom");
+
         mv.addObject("ingredientList",ingredientRepo.findAll());
 
         return mv;
+    }
+
+    @PostMapping("addCustom")
+    public ModelAndView addCustom(Coffee coffee)
+    {
+
+        // You need to put here the logic
+
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customSuccess");
+
+        return mv;
+
     }
 
     @GetMapping("/orders")
@@ -72,6 +92,15 @@ public class CoffeeController {
     {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("orders");
+
+        return mv;
+    }
+
+    @GetMapping("/cart")
+    public ModelAndView cart()
+    {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("cart");
 
         return mv;
     }
