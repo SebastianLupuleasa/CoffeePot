@@ -21,6 +21,9 @@ public class CoffeeController {
     @Autowired
     CoffeeRepository coffeRepo;
 
+    @Autowired
+    IngredientRepository ingredientRepo;
+
     @GetMapping("")
     public ModelAndView home()
     {
@@ -57,8 +60,9 @@ public class CoffeeController {
     @GetMapping("/custom")
     public ModelAndView custom()
     {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("custom");
+        ModelAndView mv = new ModelAndView("custom");
+
+        mv.addObject("ingredientList",ingredientRepo.findAll());
 
         return mv;
     }

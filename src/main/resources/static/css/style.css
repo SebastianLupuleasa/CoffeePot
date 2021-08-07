@@ -31,7 +31,7 @@ body, html {
     font-weight: bold;
     border: 3px solid #f1f1f1;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -48,6 +48,34 @@ body, html {
     border-radius: 35%;
     border: 2px solid goldenrod;
     color: yellow;
+}
+
+.row {
+    margin-top: 3%;
+    font-size: 25px;
+}
+
+.col-12 {
+    border: 3px solid goldenrod;
+    width: 25%;
+    margin:2%;
+    margin-left: 15%;
+}
+
+label {
+    background-color:red;
+    padding: 5px;
+    cursor:pointer;
+
+}
+
+label input {
+    /* could use visibility, display, positioning, -text-indent to hide this */
+    opacity:0;
+}
+
+.col-6 {
+    background-color: dimgray;
 }
 
 .flex-menu{
