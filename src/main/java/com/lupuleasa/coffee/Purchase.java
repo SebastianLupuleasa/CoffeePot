@@ -27,6 +27,8 @@ public class Purchase {
     @Column(name = "purchase_date")
     private Date createDate;
 
+
+
     public int getId() {
         return id;
     }

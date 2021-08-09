@@ -31,8 +31,12 @@ public class Customer {
     private List<Purchase> purchases;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address", referencedColumnName = "Id")
+    @JoinColumn(name = "address", referencedColumnName = "id")
     private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart", referencedColumnName = "id")
+    private Cart cart;
 
     public int getId() {
         return id;
@@ -56,6 +60,14 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public String getRoles() {

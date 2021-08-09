@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface IngredientRepository extends JpaRepository<Ingredient,Integer> {
-    Optional<Ingredient> findByname(String name);
+public interface CartRepository extends JpaRepository<Cart,Integer> {
 
-    @Query( "select i from Ingredient i where i.id in :ids" )
-    List<Ingredient> findByIds(int[] ids);
 }

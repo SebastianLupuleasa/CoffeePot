@@ -10,6 +10,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoffeePot</title>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -39,12 +43,16 @@
                 <p class="card-text"> <c:out value="${ingredient.name}"/></p>
      </c:forEach>
                 <p class="card-text">Price: <c:out value="${coffee.price}"/> $</p>
-                <a href="/menu" class="btn btn-warning">Pick</a>
+                <button id="btnADD" onclick="coffeeSUB(<c:out value="${coffee.id}"/>)" class="btn btn-warning">-</button>
+                <input id='a<c:out value="${coffee.id}"/>' type="text" style="width: 60px; height: 40px; text-align: center;" value="1">
+                <button id="btnSUB" onclick="coffeeADD(<c:out value="${coffee.id}"/>)" class="btn btn-warning">+</button><br><br>
+                <button value='<c:out value="${coffee.id}"/>' class="btn btn-warning pickBtn">Choose</button>
             </div>
         </div></div>
  </c:forEach>
 </div></div>
 
+<script src="javascript/menu.js"></script>
 
 </body>
 </html>

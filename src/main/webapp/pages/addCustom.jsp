@@ -39,7 +39,7 @@
             <h1>Ingredients:</h1>
             <h2 id="menuTotal">Total: 0.00$</h2>
 <c:forEach items="${ingredientList}" var="ingredient">
-            <label class="col-12 col-md-8" ><input name="ingredients" value="<c:out value="${ingredient}"/>" onclick="changeIngredientsColor(this.parentElement,<c:out value="${ingredient.price}"/>)" type="checkbox" ><c:out value="${ingredient.name}"/> (<c:out value="${ingredient.price}"/>$)</label>
+            <label class="col-12 col-md-8" ><input name="ingredients" value="<c:out value="${ingredient.id}"/>" onclick="changeIngredientsColor(this.parentElement,<c:out value="${ingredient.price}"/>)" type="checkbox" ><c:out value="${ingredient.name}"/> (<c:out value="${ingredient.price}"/>$)</label>
 </c:forEach>
 
         </div>
