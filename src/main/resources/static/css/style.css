@@ -134,3 +134,9 @@ label input {
     margin-left: 65%;
 
 }
+
+.container-sm {
+    background-color:white;
+    color: black;
+    opacity: 0.5;
+}

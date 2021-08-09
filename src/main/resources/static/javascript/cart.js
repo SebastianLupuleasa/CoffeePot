@@ -37,6 +37,23 @@ $(document).on('click','.emptyCart', function() {
     });
 });
 
+$(document).on('click','.makePurchase', function() {
+    $.ajax({
+        type: "GET",
+        url: "/makePurchase",
+        data: {
+        },success() {
+            alert("purchase made!");
+            $.ajax({
+                type: "GET",
+                url: "/cart/",
+                data: {
+                },
+            });
+        }
+    });
+});
+
 $(document).ajaxStop(function(){
     window.location.reload();
 });

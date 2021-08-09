@@ -17,6 +17,17 @@ public class QuantifiedCoffee{
     private float price;
     private String imagePath;
 
+    @ManyToMany(mappedBy = "coffees")
+    private List<Purchase> purchases;
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
     public String getImagePath() {
         return imagePath;
     }

@@ -26,23 +26,12 @@ public class Coffee {
 
     private float price;
 
-    @ManyToMany(mappedBy = "coffees")
-    private List<Purchase> purchases;
-
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
-
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
     }
 
     public String getImagePath() {

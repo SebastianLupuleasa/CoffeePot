@@ -18,7 +18,7 @@ public class Purchase {
     private Customer customer;
 
     @ManyToMany
-    private List<Coffee> coffees;
+    private List<QuantifiedCoffee> coffees;
 
     private float amount;
 
@@ -26,8 +26,6 @@ public class Purchase {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "purchase_date")
     private Date createDate;
-
-
 
     public int getId() {
         return id;
@@ -45,11 +43,11 @@ public class Purchase {
         this.customer = customer;
     }
 
-    public List<Coffee> getCoffees() {
+    public List<QuantifiedCoffee> getCoffees() {
         return coffees;
     }
 
-    public void setCoffees(List<Coffee> coffees) {
+    public void setCoffees(List<QuantifiedCoffee> coffees) {
         this.coffees = coffees;
     }
 

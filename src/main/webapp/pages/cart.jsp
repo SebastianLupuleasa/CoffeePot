@@ -44,7 +44,7 @@
                     <p class="card-text">Quantity: <c:out value="${coffee.amount}"/></p>
                     <p class="card-text">Total: <c:out value="${coffee.amount}"/> x <c:out value="${coffee.price}"/> $ = <c:out value="${coffee.price * coffee.amount}"/>  $</p>
 
-                    <button id="btnADD" onclick="coffeeSUB(<c:out value="'${coffee.name}"/>')" class="btn btn-warning">-</button>
+                    <button id="btnADD" onclick="coffeeSUB('<c:out value="${coffee.name}"/>')" class="btn btn-warning">-</button>
                     <input id='<c:out value="${coffee.name}"/>' type="text" style="width: 60px; height: 40px; text-align: center;" value="1">
                     <button id="btnSUB" onclick="coffeeADD('<c:out value="${coffee.name}"/>')" class="btn btn-warning">+</button><br><br>
                     <button value='<c:out value="${coffee.name}"/>' class="btn btn-danger removeBtn">Remove</button>

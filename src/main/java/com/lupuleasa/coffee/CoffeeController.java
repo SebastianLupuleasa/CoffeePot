@@ -1,21 +1,21 @@
 package com.lupuleasa.coffee;
 
-import org.hibernate.Hibernate;
-import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class CoffeeController {
+
+
+
+    @Autowired
+    PurchaseRepository purchaseRepo;
 
     @Autowired
     QuantifiedCoffeeRepository qcoffeRepo;
@@ -144,8 +144,27 @@ public class CoffeeController {
     @GetMapping("/orders")
     public ModelAndView orders()
     {
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("orders");
+        mv.addObject("ordersList",purchaseRepo.findByCustomer(customerRepo.findByUserName(auth.getName())));
+
+        return mv;
+    }
+
+    @GetMapping("/orders/{id}")
+    public ModelAndView orders(@PathVariable String id)
+    {
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("order");
+        mv.addObject("order",purchaseRepo.getById(Integer.parseInt(id)));
+        mv.addObject("address",customerRepo.findByUserName(auth.getName()).getAddress());
 
         return mv;
     }
@@ -232,6 +251,39 @@ public class CoffeeController {
         cart.setCoffees(null);
 
         cartRepo.save(cart);
+
+    }
+
+    @GetMapping("/makePurchase")
+    public void makePurchase()
+    {
+
+    // For user details
+     Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
+
+
+
+        Purchase purchase = new Purchase();
+
+         float total=0;
+
+        List<QuantifiedCoffee> coffeeList = new ArrayList<QuantifiedCoffee>();
+
+         for(QuantifiedCoffee c : customerRepo.findByUserName(auth.getName()).getCart().getCoffees())
+         {
+             total = total+ c.getPrice() * c.getAmount();
+             coffeeList.add(c);
+         }
+
+        purchase.setAmount(total);
+        purchase.setCustomer(customerRepo.findByUserName(auth.getName()));
+
+        purchase.setCoffees(coffeeList);
+
+      if(!coffeeList.isEmpty()) {
+            purchaseRepo.save(purchase);
+        }
 
     }
 
