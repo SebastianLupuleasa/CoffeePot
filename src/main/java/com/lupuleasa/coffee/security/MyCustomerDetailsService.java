@@ -1,5 +1,8 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.security;
 
+import com.lupuleasa.coffee.models.Customer;
+import com.lupuleasa.coffee.repositories.CustomerRepository;
+import com.lupuleasa.coffee.security.MyCustomerDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

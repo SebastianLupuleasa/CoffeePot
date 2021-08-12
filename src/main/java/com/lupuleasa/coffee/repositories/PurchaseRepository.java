@@ -1,11 +1,12 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.repositories;
 
+import com.lupuleasa.coffee.models.Customer;
+import com.lupuleasa.coffee.models.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase,Integer> {

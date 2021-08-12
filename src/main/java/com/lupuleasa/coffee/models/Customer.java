@@ -1,6 +1,4 @@
-package com.lupuleasa.coffee;
-
-import org.hibernate.criterion.Order;
+package com.lupuleasa.coffee.models;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +10,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(unique=true)
     private String userName;
     private String password;
     private String roles;
@@ -30,11 +29,11 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Purchase> purchases;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address", referencedColumnName = "id")
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cart", referencedColumnName = "id")
     private Cart cart;
 

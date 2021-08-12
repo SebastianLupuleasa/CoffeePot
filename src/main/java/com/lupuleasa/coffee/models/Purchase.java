@@ -1,5 +1,7 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.models;
 
+import com.lupuleasa.coffee.models.Customer;
+import com.lupuleasa.coffee.models.QuantifiedCoffee;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

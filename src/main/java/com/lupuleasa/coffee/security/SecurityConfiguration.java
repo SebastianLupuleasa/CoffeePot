@@ -1,4 +1,4 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/menu").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/custom").hasAnyRole("ADMIN", "USER")
@@ -34,6 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/orders").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/orders/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/cart").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/admin/customers").hasAnyRole("ADMIN")
+                .antMatchers("/admin/customers/**").hasAnyRole("ADMIN")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/addCustomer").hasAnyRole("ADMIN")
                 .antMatchers("/h2-console/**").permitAll()
                 .and().formLogin();
 

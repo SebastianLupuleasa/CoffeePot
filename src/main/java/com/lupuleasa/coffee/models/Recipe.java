@@ -1,7 +1,6 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

@@ -1,5 +1,6 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.repositories;
 
+import com.lupuleasa.coffee.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

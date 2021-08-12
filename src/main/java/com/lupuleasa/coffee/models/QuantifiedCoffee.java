@@ -1,6 +1,4 @@
-package com.lupuleasa.coffee;
-
-import com.lupuleasa.coffee.Coffee;
+package com.lupuleasa.coffee.models;
 
 import javax.persistence.*;
 import java.util.List;

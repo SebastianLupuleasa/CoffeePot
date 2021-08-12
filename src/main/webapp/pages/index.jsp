@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html lang="en">
@@ -14,6 +15,7 @@
 <div class="bg-image"></div>
 
 <div class="bg-text">
+    <c:if test="${status.equals('ROLE_ADMIN')}"><button id="adminBtn" type="button" onclick="location.href = 'http://localhost:8080/admin';" class="btn btn-success createCoffee logoutBtn" style="float:left; margin-left:0%;">Admin panel</button></c:if>
 
 
     <form action="logout">
@@ -23,7 +25,10 @@
     <br>
     <br>
 
+
+
     <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
+
 
 
     <div class="flex-menu">

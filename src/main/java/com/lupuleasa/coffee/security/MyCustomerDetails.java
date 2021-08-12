@@ -1,5 +1,6 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.security;
 
+import com.lupuleasa.coffee.models.Customer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

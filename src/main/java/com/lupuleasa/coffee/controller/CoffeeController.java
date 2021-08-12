@@ -1,5 +1,7 @@
-package com.lupuleasa.coffee;
+package com.lupuleasa.coffee.controller;
 
+import com.lupuleasa.coffee.models.*;
+import com.lupuleasa.coffee.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,8 @@ import java.util.List;
 public class CoffeeController {
 
 
+    @Autowired
+    AddressRepository addressRepo;
 
     @Autowired
     PurchaseRepository purchaseRepo;
@@ -39,27 +43,119 @@ public class CoffeeController {
     public ModelAndView home()
     {
 
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
        ModelAndView mv = new ModelAndView();
        mv.setViewName("index");
+
+        mv.addObject("status",customerRepo.findByUserName(auth.getName()).getRoles());
 
        return mv;
     }
 
-    @GetMapping("/user")
-    public String user()
+    @GetMapping("/admin")
+    public ModelAndView admin()
     {
-        return "custom";
+        ModelAndView mv = new ModelAndView("admin");
+
+        return mv;
     }
 
-    @GetMapping("/admin")
-    public String admin()
+    @GetMapping("/admin/customers")
+    public ModelAndView customers()
     {
-        return "menu";
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
+        ModelAndView mv = new ModelAndView("manageCustomers");
+
+        List<Customer> customers = customerRepo.findAll();
+
+        customers.remove(customerRepo.findByUserName(auth.getName()));
+
+        mv.addObject("customerList",customers);
+
+        return mv;
+    }
+
+    @GetMapping("/admin/customers/{i}")
+    public ModelAndView deleteCustomer(@PathVariable String i)
+    {
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
+        ModelAndView mv = new ModelAndView("manageCustomers");
+
+        customerRepo.delete(customerRepo.getById(Integer.parseInt(i)));
+
+        List<Customer> customers = customerRepo.findAll();
+
+        customers.remove(customerRepo.findByUserName(auth.getName()));
+
+        mv.addObject("customerList",customers);
+
+
+        return mv;
+    }
+
+    @GetMapping("addCustomer")
+    public ModelAndView addCustomer()
+    {
+        ModelAndView mv = new ModelAndView("addCustomer");
+
+        return mv;
+    }
+
+    @GetMapping("addCustomer/{myId}")
+    public ModelAndView addCustomer(@PathVariable String myId)
+    {
+        ModelAndView mv = new ModelAndView("addCustomer");
+        mv.addObject("customer",customerRepo.getById(Integer.parseInt(myId)));
+
+        return mv;
+    }
+
+    @PostMapping("addCustomer")
+    public ModelAndView addCustomer(String customerName, String customerPass, String customerStreet, String customerNumber,String customerRole)
+    {
+
+        Customer customer = new Customer();
+        customer.setUserName(customerName);
+        customer.setPassword(customerPass);
+
+        Address address = new Address();
+        address.setStreetName(customerStreet);
+        address.setBuildingNumber(Integer.parseInt(customerNumber));
+
+        addressRepo.save(address);
+
+        customer.setAddress(address);
+
+        Cart cart = new Cart();
+
+        customer.setCart(cart);
+
+        if(customerRole!=null)
+        {
+            customer.setRoles("ROLE_ADMIN");
+        }
+        else
+            customer.setRoles("ROLE_USER");
+
+        customerRepo.save(customer);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customSuccessAdmin");
+
+        return mv;
+
     }
 
     @GetMapping("/menu")
     public ModelAndView menu()
     {
+
 
        ModelAndView mv = new ModelAndView("menu");
 
@@ -77,6 +173,7 @@ public class CoffeeController {
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
         ModelAndView mv = new ModelAndView("custom");
+
 
         mv.addObject("coffeeList",coffeRepo.findByCustomer(customerRepo.findByUserName(auth.getName())));
 
@@ -180,8 +277,10 @@ public class CoffeeController {
 
            if(!qcoffeRepo.existsById(Integer.parseInt(coffee))){
 
+               int min = 2500;
+               int max = 100000000;
             QuantifiedCoffee qcoffee = new QuantifiedCoffee();
-            qcoffee.setId(Integer.parseInt(coffee));
+            qcoffee.setId(Integer.parseInt(coffee)+(int)(Math.random()*(max-min+1)+min));
             qcoffee.setName(coffeRepo.getById((Integer.parseInt(coffee))).getName());
             qcoffee.setAmount(Integer.parseInt(amount));
             qcoffee.setPrice(coffeRepo.getById((Integer.parseInt(coffee))).getPrice());
@@ -261,10 +360,10 @@ public class CoffeeController {
     // For user details
      Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
-
-
-
+        Cart cart = new Cart();
         Purchase purchase = new Purchase();
+
+        cart = customerRepo.findByUserName(auth.getName()).getCart();
 
          float total=0;
 
@@ -274,6 +373,8 @@ public class CoffeeController {
          {
              total = total+ c.getPrice() * c.getAmount();
              coffeeList.add(c);
+             c.setUser_id(-1);
+             qcoffeRepo.save(c);
          }
 
         purchase.setAmount(total);
@@ -281,9 +382,12 @@ public class CoffeeController {
 
         purchase.setCoffees(coffeeList);
 
+
       if(!coffeeList.isEmpty()) {
-            purchaseRepo.save(purchase);
-        }
+          purchaseRepo.save(purchase);
+          cart.setCoffees(null);
+          cartRepo.save(cart);
+      }
 
     }
 
