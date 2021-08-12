@@ -23,6 +23,7 @@ public class Coffee {
 
     private String imagePath;
 
+    @Transient
     private float price;
 
     public Customer getCustomer() {
@@ -75,7 +76,11 @@ public class Coffee {
     }
 
     public float getPrice() {
-        return price;
+        float total=0;
+        for(Ingredient i: this.recipe.getIngredients())
+            total=total+i.getPrice();
+
+        return total;
     }
 
     public void setPrice(float price) {

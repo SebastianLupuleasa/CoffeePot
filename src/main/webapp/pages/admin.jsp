@@ -29,7 +29,7 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080/admin';" alt=""/>
+    <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080';" alt=""/>
 
 
     <div class="flex-menu">
