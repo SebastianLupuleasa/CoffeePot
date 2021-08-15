@@ -43,20 +43,11 @@
         </div></div>
 
         <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="/images/custom-logo.png" width="150px" height="150px" alt="Custom">
-            <div class="card-body">
-                <h5 class="card-title">Manage Coffees</h5>
-                <p class="card-text">see and change info about coffees</p>
-                <a href="/custom" class="btn btn-warning">Select</a>
-            </div>
-        </div></div>
-
-        <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
             <img class="card-img-top" src="/images/ingredients-icon.png" width="150px" height="150px" alt="Order">
             <div class="card-body ">
                 <h5 class="card-title">Manage Ingredients</h5>
                 <p class="card-text">see and change info about ingredients</p>
-                <a href="/orders" class="btn btn-warning">Select</a>
+                <a href="/admin/ingredients" class="btn btn-warning">Select</a>
             </div>
         </div></div>
     </div>

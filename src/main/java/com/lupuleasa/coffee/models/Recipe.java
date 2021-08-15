@@ -12,7 +12,7 @@ public class Recipe {
     private int id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany()
     private List<Ingredient> ingredients;
 
     public int getId() {

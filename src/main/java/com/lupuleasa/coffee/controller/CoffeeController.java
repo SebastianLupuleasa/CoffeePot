@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,97 @@ public class CoffeeController {
     public ModelAndView admin()
     {
         ModelAndView mv = new ModelAndView("admin");
+
+        return mv;
+    }
+
+    @GetMapping("/admin/ingredients")
+    public ModelAndView ingredients()
+    {
+        ModelAndView mv = new ModelAndView("manageIngredients");
+
+        mv.addObject("ingredientList",ingredientRepo.findAll());
+
+        return mv;
+    }
+
+    @GetMapping("addIngredient")
+    public ModelAndView addIngredient()
+    {
+        ModelAndView mv = new ModelAndView("addIngredient");
+
+        return mv;
+    }
+
+    @PostMapping("addIngredient/addIngredient/{myId}")
+    public ModelAndView addIngredient(String ingredientName, String ingredientPrice, @PathVariable String myId)
+    {
+        Ingredient ingredient = new Ingredient();
+
+
+
+                    ingredient= ingredientRepo.getById(Integer.parseInt(myId));
+                    ingredient.setName(ingredientName);
+                    ingredient.setPrice(Float.parseFloat(ingredientPrice));
+
+                    ingredientRepo.save(ingredient);
+
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customSuccessAdmin");
+
+        return mv;
+
+    }
+
+    @PostMapping("addIngredient/")
+    public ModelAndView addIngredient(String ingredientName, String ingredientPrice)
+    {
+        Ingredient ingredient = new Ingredient();
+
+
+        ingredient.setName(ingredientName);
+        ingredient.setPrice(Float.parseFloat(ingredientPrice));
+
+        ingredientRepo.save(ingredient);
+
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customSuccessAdmin");
+
+        return mv;
+
+    }
+
+    @GetMapping("addIngredient/{myId}")
+    public ModelAndView addIngredient(@PathVariable String myId)
+    {
+        ModelAndView mv = new ModelAndView("addIngredient");
+        mv.addObject("ingredient",ingredientRepo.getById(Integer.parseInt(myId)));
+
+        return mv;
+    }
+
+    @GetMapping("/admin/ingredients/{i}")
+    public ModelAndView deleteIngredient(@PathVariable String i)
+    {
+
+
+        ModelAndView mv = new ModelAndView("manageIngredients");
+
+
+        for(Recipe r : recipeRepo.findAll() )
+        {
+            if(r.getIngredients().contains(ingredientRepo.getById(Integer.parseInt(i)))) {
+                for (Coffee c : coffeRepo.findByRecipe(r))
+                    coffeRepo.delete(c);
+            }
+        }
+
+        ingredientRepo.delete(ingredientRepo.getById(Integer.parseInt(i)));
+
+        mv.addObject("ingredientList",ingredientRepo.findAll());
+
 
         return mv;
     }
@@ -121,6 +213,42 @@ public class CoffeeController {
     {
 
         Customer customer = new Customer();
+        customer.setUserName(customerName);
+        customer.setPassword(customerPass);
+
+        Address address = new Address();
+        address.setStreetName(customerStreet);
+        address.setBuildingNumber(Integer.parseInt(customerNumber));
+
+        addressRepo.save(address);
+
+        customer.setAddress(address);
+
+        Cart cart = new Cart();
+
+        customer.setCart(cart);
+
+        if(customerRole!=null)
+        {
+            customer.setRoles("ROLE_ADMIN");
+        }
+        else
+            customer.setRoles("ROLE_USER");
+
+        customerRepo.save(customer);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customSuccessAdmin");
+
+        return mv;
+
+    }
+
+    @PostMapping("addCustomer/addCustomer/{myId}")
+    public ModelAndView addCustomer(String customerName, String customerPass, String customerStreet, String customerNumber,String customerRole, @PathVariable String myId)
+    {
+        Customer customer;
+        customer= customerRepo.getById(Integer.parseInt(myId));
         customer.setUserName(customerName);
         customer.setPassword(customerPass);
 
