@@ -14,6 +14,7 @@ public class Ingredient {
     private int id;
     private String name;
     private float price;
+    private int stock=10;
 
 
     public List<Recipe> getRecipes() {
@@ -33,6 +34,14 @@ public class Ingredient {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public String getName() {

@@ -17,14 +17,14 @@ insert into cart values(991,0);
 
 -- Espressso
 
- insert into ingredient values(990,'espresso',0.5);
+ insert into ingredient values(990,'espresso',0.5,10);
  insert into recipe values(990,'espresso');
  insert into recipe_ingredients values(990,990);
  insert into coffee values(990,'espresso fast','images/espresso.png','espresso',990,990);
 
 -- Machiatto
 
-insert into ingredient values(991,'milk foam',0.2);
+insert into ingredient values(991,'milk foam',0.2,10);
 insert into recipe values(991,'machiatto');
 insert into recipe_ingredients values(991,990);
 insert into recipe_ingredients values(991,991);
@@ -32,7 +32,7 @@ insert into coffee values(991,'machiatto is good','images/machiatto.png','machia
 
 -- Coffee Latte
 
-insert into ingredient values(992,'steamed milk',0.3);
+insert into ingredient values(992,'steamed milk',0.3,2);
 insert into recipe values(992,'coffee latte');
 insert into recipe_ingredients values(992,990);
 insert into recipe_ingredients values(992,992);
@@ -48,9 +48,9 @@ insert into coffee values(993,'cappucino lalacino','images/cappucino.png','cappu
 
 --   Coffee Miel
 
-insert into ingredient values(993,'black coffee',0.5);
-insert into ingredient values(994,'honey',0.2);
-insert into ingredient values(995,'cinnamon',0.8);
+insert into ingredient values(993,'black coffee',0.5,3);
+insert into ingredient values(994,'honey',0.2,4);
+insert into ingredient values(995,'cinnamon',0.8,2);
 insert into recipe values(994,'coffee miel');
 insert into recipe_ingredients values(994,993);
 insert into recipe_ingredients values(994,994);

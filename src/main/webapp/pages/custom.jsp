@@ -41,14 +41,21 @@
                     <p class="card-text">Description: <c:out value="${coffee.description}"/></p>
                     Ingredients:
                     <c:forEach items="${coffee.recipe.ingredients}" var="ingredient">
-                        <p class="card-text"> <c:out value="${ingredient.name}"/></p>
+                        <c:if test="${ingredient.stock <= 3}"><c:set var="status" value="out" /></c:if>
+                              <p class="card-text"> <c:out value="${ingredient.name}"/></p>
                     </c:forEach>
-                    <p class="card-text">Price: <c:out value="${coffee.price}"/> $</p>
-                    <a href="/custom/<c:out value="${coffee.id}"/>" class="btn btn-danger">Delete</a><br><br>
-                    <button id="btnADD" onclick="coffeeSUB(<c:out value="${coffee.id}"/>)" class="btn btn-warning">-</button>
-                    <input id='a<c:out value="${coffee.id}"/>' type="text" style="width: 60px; height: 40px; text-align: center;" value="1">
-                    <button id="btnSUB" onclick="coffeeADD(<c:out value="${coffee.id}"/>)" class="btn btn-warning">+</button><br><br>
-                    <button value='<c:out value="${coffee.id}"/>' class="btn btn-warning pickBtn">Choose</button>
+                    <c:choose>
+                        <c:when test="${status.equals('out')}">
+                            <p style="color: red;">Out of stock!</p>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="card-text">Price: <c:out value="${coffee.price}"/> $</p>
+                            <button id="btnADD" onclick="coffeeSUB(<c:out value="${coffee.id}"/>)" class="btn btn-warning">-</button>
+                            <input id='a<c:out value="${coffee.id}"/>' type="text" style="width: 60px; height: 40px; text-align: center;" value="1">
+                            <button id="btnSUB" onclick="coffeeADD(<c:out value="${coffee.id}"/>)" class="btn btn-warning">+</button><br><br>
+                            <button value='<c:out value="${coffee.id}"/>' class="btn btn-warning pickBtn">Choose</button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div></div>
         </c:forEach>

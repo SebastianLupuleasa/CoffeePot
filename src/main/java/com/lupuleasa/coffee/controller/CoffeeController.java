@@ -2,6 +2,8 @@ package com.lupuleasa.coffee.controller;
 
 import com.lupuleasa.coffee.models.*;
 import com.lupuleasa.coffee.repositories.*;
+import com.lupuleasa.coffee.services.CheckStockService;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +11,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 public class CoffeeController {
 
+
+    @Autowired
+    CheckStockService checkStockService;
 
     @Autowired
     AddressRepository addressRepo;
@@ -40,6 +48,7 @@ public class CoffeeController {
     @Autowired
     CustomerRepository customerRepo;
 
+
     @GetMapping("")
     public ModelAndView home()
     {
@@ -51,6 +60,7 @@ public class CoffeeController {
        mv.setViewName("index");
 
         mv.addObject("status",customerRepo.findByUserName(auth.getName()).getRoles());
+        mv.addObject("stockStatus", checkStockService.checkStock());
 
        return mv;
     }
@@ -70,6 +80,8 @@ public class CoffeeController {
 
         mv.addObject("ingredientList",ingredientRepo.findAll());
 
+        mv.addObject("status", checkStockService.checkStock());
+
         return mv;
     }
 
@@ -82,15 +94,16 @@ public class CoffeeController {
     }
 
     @PostMapping("addIngredient/addIngredient/{myId}")
-    public ModelAndView addIngredient(String ingredientName, String ingredientPrice, @PathVariable String myId)
+    public ModelAndView addIngredient(String ingredientName, String ingredientPrice,String ingredientStock, @PathVariable String myId)
     {
-        Ingredient ingredient = new Ingredient();
+        Ingredient ingredient;
 
 
 
                     ingredient= ingredientRepo.getById(Integer.parseInt(myId));
                     ingredient.setName(ingredientName);
                     ingredient.setPrice(Float.parseFloat(ingredientPrice));
+                    ingredient.setStock(Integer.parseInt(ingredientStock));
 
                     ingredientRepo.save(ingredient);
 
@@ -103,13 +116,14 @@ public class CoffeeController {
     }
 
     @PostMapping("addIngredient/")
-    public ModelAndView addIngredient(String ingredientName, String ingredientPrice)
+    public ModelAndView addIngredient(String ingredientName, String ingredientPrice, String ingredientStock)
     {
         Ingredient ingredient = new Ingredient();
 
 
         ingredient.setName(ingredientName);
         ingredient.setPrice(Float.parseFloat(ingredientPrice));
+        ingredient.setStock(Integer.parseInt(ingredientStock));
 
         ingredientRepo.save(ingredient);
 
@@ -321,11 +335,10 @@ public class CoffeeController {
     @PostMapping("addCustom")
     public ModelAndView addCustom(String coffeeName, String coffeeDesc, int[] ingredients)
     {
-
         // For user details
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
-        // Setting the recipe
+      // Setting the recipe
 
         Recipe recipe = new Recipe();
         recipe.setName(coffeeName);
@@ -366,6 +379,47 @@ public class CoffeeController {
         return mv;
     }
 
+    @GetMapping("admin/orders")
+    public ModelAndView adminOrders()
+    {
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
+        float total =0;
+
+        Date date = new Date();
+
+        // Add to total all the dates that are on the same day
+        for(Purchase p : purchaseRepo.findAll()) {
+            if(DateUtils.isSameDay(p.getCreateDate(),date)) {
+                total = total + p.getAmount() / 10;
+            }
+        }
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("adminOrders");
+        mv.addObject("ordersList",purchaseRepo.findAll());
+        mv.addObject("total",total);
+
+        return mv;
+    }
+
+    @GetMapping("admin/orders{id}")
+    public ModelAndView adminOrders(@PathVariable String id)
+    {
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("order");
+        mv.addObject("order",purchaseRepo.getById(Integer.parseInt(id)));
+        mv.addObject("address",customerRepo.findAll());
+
+        return mv;
+    }
+
+
     @GetMapping("/orders")
     public ModelAndView orders()
     {
@@ -403,10 +457,12 @@ public class CoffeeController {
         Cart cart = customerRepo.findByUserName(auth.getName()).getCart();
 
 
+
+
            if(!qcoffeRepo.existsById(Integer.parseInt(coffee))){
 
-               int min = 2500;
-               int max = 100000000;
+            int min = 2500;
+            int max = 100000000;
             QuantifiedCoffee qcoffee = new QuantifiedCoffee();
             qcoffee.setId(Integer.parseInt(coffee)+(int)(Math.random()*(max-min+1)+min));
             qcoffee.setName(coffeRepo.getById((Integer.parseInt(coffee))).getName());
@@ -443,6 +499,7 @@ public class CoffeeController {
     {
         // For user details
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
         Cart cart = customerRepo.findByUserName(auth.getName()).getCart();
 
         if(qcoffeRepo.getByname(coffee).getAmount() <= Float.parseFloat(amount))
@@ -473,6 +530,7 @@ public class CoffeeController {
     {
         // For user details
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
+
         Cart cart = customerRepo.findByUserName(auth.getName()).getCart();
 
         cart.setCoffees(null);
@@ -485,8 +543,8 @@ public class CoffeeController {
     public void makePurchase()
     {
 
-    // For user details
-     Principal auth = SecurityContextHolder.getContext().getAuthentication();
+        // For user details
+        Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
         Cart cart = new Cart();
         Purchase purchase = new Purchase();
@@ -522,8 +580,8 @@ public class CoffeeController {
     @GetMapping("/cart")
     public ModelAndView cart()
     {
-        // For user details
-        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+    // For user details
+            Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
         ModelAndView mv = new ModelAndView("cart");
 

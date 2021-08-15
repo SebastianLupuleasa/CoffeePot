@@ -35,6 +35,7 @@
             <h1>Customer Info:</h1>
             <input type="text" class="rightInput"  id="ingredientName" value="${ingredient.name}" name="ingredientName" placeholder="Name" required/>
             <input type="number"  class="rightInput" id="ingredientPrice" value="${ingredient.price}" name="ingredientPrice" placeholder="Price" required/>
+            <input type="number"  class="rightInput" id="ingredientStock" value="${ingredient.stock}" name="ingredientStock" placeholder="Stock" required/>
 
         </div>
         <input type="image" class="submitCustom"  id="submitCustomBtn" src="/images/add-icon.png"  alt="Submit" style="width: 75px;" />

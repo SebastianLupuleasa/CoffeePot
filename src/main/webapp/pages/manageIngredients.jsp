@@ -32,13 +32,18 @@
     <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080/admin';" alt=""/>
 
     <button type="button" onclick="location.href = 'http://localhost:8080/addIngredient';" class="btn btn-success createCoffee">Add Ingredient</button>
+    <br>
+
+    <c:if test="${status.equals(true)}"><h1 style="color: yellow;">Your stock on some ingredients is running low....</h1></c:if>
+
 
     <div class="flex-menu">
         <c:forEach items="${ingredientList}" var="ingredient">
-            <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
+            <div class="p-2 bd-highlight col-example text-center" style="<c:if test="${ingredient.stock <= 3}"> border: 4px solid yellow; </c:if>"><div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Name: <c:out value="${ingredient.name}"/></h5>
-                    <p class="card-text">Price: <c:out value="${ingredient.price}"/></p>
+                    <p class="card-text">Price: <c:out value="${ingredient.price}"/> $</p>
+                    <p class="card-text">Stock: <c:out value="${ingredient.stock}"/></p>
                     <a href="/addIngredient/<c:out value="${ingredient.id}"/>" class="btn btn-warning">Modify</a>
                     <a href="/admin/ingredients/<c:out value="${ingredient.id}"/>" class="btn btn-danger">Delete</a>
                 </div>

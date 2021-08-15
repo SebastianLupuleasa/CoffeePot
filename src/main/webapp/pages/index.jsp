@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoffeePot</title>
+
 </head>
 <body>
 
@@ -16,6 +17,7 @@
 
 <div class="bg-text">
     <c:if test="${status.equals('ROLE_ADMIN')}"><button id="adminBtn" type="button" onclick="location.href = 'http://localhost:8080/admin';" class="btn btn-success createCoffee logoutBtn" style="float:left; margin-left:0%;">Admin panel</button></c:if>
+
 
 
     <form action="logout">
@@ -28,6 +30,8 @@
 
 
     <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
+
+    <c:if test="${status.equals('ROLE_ADMIN') && stockStatus.equals(true)}"><h1 style="color: yellow;">Your stock on some ingredients is running low....</h1></c:if>
 
 
 

@@ -39,7 +39,15 @@
             <h1>Ingredients:</h1>
             <h2 id="menuTotal">Total: 0.00$</h2>
 <c:forEach items="${ingredientList}" var="ingredient">
+
+    <c:choose>
+    <c:when test="${ingredient.stock >3}">
             <label class="col-12 col-md-8" ><input name="ingredients" value="<c:out value="${ingredient.id}"/>" onclick="changeIngredientsColor(this.parentElement,<c:out value="${ingredient.price}"/>)" type="checkbox" ><c:out value="${ingredient.name}"/> (<c:out value="${ingredient.price}"/>$)</label>
+    </c:when>
+    <c:otherwise>
+        <label class="col-12 col-md-8" style="background-color: grey; font-size: small;"><small style="color: blue">Out of stock!</small> <c:out value="${ingredient.name}"/> (<c:out value="${ingredient.price}"/>$)</label>
+    </c:otherwise>
+    </c:choose>
 </c:forEach>
 
         </div>

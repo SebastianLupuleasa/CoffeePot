@@ -50,9 +50,19 @@
                 <a href="/admin/ingredients" class="btn btn-warning">Select</a>
             </div>
         </div></div>
-    </div>
-</div>
 
+            <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/images/orders-logo.png" width="150px" height="150px" alt="Menu">
+                <div class="card-body">
+                    <h5 class="card-title">See orders and profit</h5>
+                    <p class="card-text">see all your profits</p>
+                    <a href="/admin/orders" class="btn btn-warning">Select</a>
+                </div>
+            </div></div>
+
+    </div>
+
+</div>
 </body>
 </html>
 
