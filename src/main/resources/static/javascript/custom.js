@@ -52,8 +52,8 @@ $(document).on('click','.pickBtn', function() {
         data: {
             'mycoffee': mycoffee,
             'myamount': myamount
-        },success()
-        { alert("coffee added to the cart!");}
+        },success(data)
+        { alert(data);}
     });
 });
 

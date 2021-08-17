@@ -12,7 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface CoffeeRepository extends JpaRepository<Coffee,Integer> {
-    Optional<Coffee> findByname(String name);
+
+    Coffee getByName(String name);
 
     List<Coffee> findByIdGreaterThan(Integer id);
 

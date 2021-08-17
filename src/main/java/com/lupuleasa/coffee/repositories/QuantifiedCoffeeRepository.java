@@ -12,7 +12,11 @@ public interface QuantifiedCoffeeRepository extends JpaRepository<QuantifiedCoff
 
     QuantifiedCoffee getByname(String name);
 
-    @Query( "select cof from QuantifiedCoffee cof where cof.user_id = :id" )
+    @Query( "select cof from QuantifiedCoffee cof where cof.uid = :id" )
     List<QuantifiedCoffee> findByCustomerId(int id);
 
-}
+    boolean existsByName(String name);
+
+    QuantifiedCoffee getQuantifiedCoffeeByNameAndUid(String name , int user_id);
+
+    }

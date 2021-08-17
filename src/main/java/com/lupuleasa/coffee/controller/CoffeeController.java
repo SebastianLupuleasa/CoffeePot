@@ -449,7 +449,7 @@ public class CoffeeController {
     }
 
     @PostMapping("/cart")
-    public ModelAndView cart(@RequestParam("mycoffee") String coffee , @RequestParam("myamount") String amount)
+    public String cart(@RequestParam("mycoffee") String coffee , @RequestParam("myamount") String amount)
     {
         // For user details
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
@@ -457,9 +457,9 @@ public class CoffeeController {
         Cart cart = customerRepo.findByUserName(auth.getName()).getCart();
 
 
+           List<Ingredient> ingredients = coffeRepo.getById((Integer.parseInt(coffee))).getRecipe().getIngredients();
 
-
-           if(!qcoffeRepo.existsById(Integer.parseInt(coffee))){
+           if(!qcoffeRepo.existsByName(coffeRepo.getById((Integer.parseInt(coffee))).getName())){
 
             int min = 2500;
             int max = 100000000;
@@ -468,8 +468,19 @@ public class CoffeeController {
             qcoffee.setName(coffeRepo.getById((Integer.parseInt(coffee))).getName());
             qcoffee.setAmount(Integer.parseInt(amount));
             qcoffee.setPrice(coffeRepo.getById((Integer.parseInt(coffee))).getPrice());
-            qcoffee.setUser_id(customerRepo.findByUserName(auth.getName()).getId());
+            qcoffee.setUid(customerRepo.findByUserName(auth.getName()).getId());
             qcoffee.setImagePath(coffeRepo.getById((Integer.parseInt(coffee))).getImagePath());
+
+
+            if(checkStockService.checkAmount(ingredients, Integer.parseInt(amount)))
+            {
+                checkStockService.setStock(ingredients, Integer.parseInt(amount));
+            }
+            else
+            {
+                return "Stock insufficient!";
+            }
+
 
             qcoffeRepo.save(qcoffee);
 
@@ -482,16 +493,22 @@ public class CoffeeController {
             cartRepo.save(cart);}
            else
            {
-               QuantifiedCoffee qcoffee = qcoffeRepo.getById(Integer.parseInt(coffee));
-               qcoffee.setAmount(qcoffee.getAmount()+Integer.parseInt(amount));
+               QuantifiedCoffee qcoffee = qcoffeRepo.getQuantifiedCoffeeByNameAndUid(coffeRepo.getById((Integer.parseInt(coffee))).getName(),customerRepo.findByUserName(auth.getName()).getId());
+               if(qcoffee.getAmount()>=Integer.parseInt(amount))
+               {
+                   qcoffee.setAmount(qcoffee.getAmount()+Integer.parseInt(amount));
+                   checkStockService.setStock(ingredients, Integer.parseInt(amount));
+               }
+               else
+               {
+                   return "Stock insufficient!";
+               }
+
                qcoffeRepo.save(qcoffee);
            }
 
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("cart");
-
-        return mv;
+       return "Added to the cart!";
     }
 
     @PutMapping("/cart")
@@ -500,18 +517,38 @@ public class CoffeeController {
         // For user details
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
+        int min = 2500;
+        int max = 100000000;
+
         Cart cart = customerRepo.findByUserName(auth.getName()).getCart();
 
         if(qcoffeRepo.getByname(coffee).getAmount() <= Float.parseFloat(amount))
           {
+              for (Ingredient i : coffeRepo.getByName(coffee).getRecipe().getIngredients())
+              {
+                  i.setStock(qcoffeRepo.getByname(coffee).getAmount()+i.getStock());
+              }
+
               List<QuantifiedCoffee> qlist = cart.getCoffees();
+              QuantifiedCoffee q =qcoffeRepo.getByname(coffee);
               qlist.remove(qcoffeRepo.getByname(coffee));
+
               cart.setCoffees(qlist);
               cartRepo.delete(customerRepo.findByUserName(auth.getName()).getCart());
               cartRepo.save(cart);
-          }
+              q.setName(coffee + (int)(Math.random()*(max-min+1)+min));
+              q.setUid(-1);
+              qcoffeRepo.save(q);
+              }
         else{
             QuantifiedCoffee qcoffee = qcoffeRepo.getByname(coffee);
+
+            for (Ingredient i : coffeRepo.getByName(coffee).getRecipe().getIngredients())
+            {
+                i.setStock(Integer.parseInt(amount)+i.getStock());
+                ingredientRepo.save(i);
+            }
+
             qcoffee.setAmount(qcoffeRepo.getByname(coffee).getAmount()-Integer.parseInt(amount));
             qcoffeRepo.save(qcoffee);
             }
@@ -532,6 +569,15 @@ public class CoffeeController {
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
 
         Cart cart = customerRepo.findByUserName(auth.getName()).getCart();
+
+        for( QuantifiedCoffee q : cart.getCoffees() )
+        {
+            for(Ingredient i : coffeRepo.getByName(q.getName()).getRecipe().getIngredients())
+            {
+                i.setStock(i.getStock()+q.getAmount());
+                ingredientRepo.save(i);
+            }
+        }
 
         cart.setCoffees(null);
 
@@ -559,7 +605,7 @@ public class CoffeeController {
          {
              total = total+ c.getPrice() * c.getAmount();
              coffeeList.add(c);
-             c.setUser_id(-1);
+             c.setUid(-1);
              qcoffeRepo.save(c);
          }
 

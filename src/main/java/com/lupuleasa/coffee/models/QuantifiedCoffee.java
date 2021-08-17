@@ -9,7 +9,7 @@ public class QuantifiedCoffee{
 
     @Id
     private int id;
-    private int user_id;
+    private int uid;
     private String name;
     private int amount;
     private float price;
@@ -34,12 +34,12 @@ public class QuantifiedCoffee{
         this.imagePath = imagePath;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public float getPrice() {
