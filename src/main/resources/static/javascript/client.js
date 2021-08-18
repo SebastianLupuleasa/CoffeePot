@@ -89,7 +89,7 @@ var payWithCard = function(stripe, card, clientSecret) {
                 data: {
                 },
             });
-                     window.location.replace('http://localhost:8080');
+                     window.location.replace('https://endava-coffeepot.herokuapp.com');
         }
         });
         }
