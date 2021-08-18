@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 <head>
@@ -31,8 +32,9 @@
                     <div class="p-2 bd-highlight col-example text-center"><div class="card" style="width: 18rem;">
                           <div class="card-body">
                             <h5 class="card-title">Id:  <c:out value='${order.id}'/></h5>
-                            <p class="card-text">Amount:  <c:out value='${order.amount}'/> $</p>
+                            <p class="card-text">Amount:  <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.amount}"/> $</p>
                             <p class="card-text">Purchase Date: <c:out value='${order.createDate}'/></p>
+                            <p class="card-text">Delivery Method: <c:out value='${order.deliver}'/></p>
                             <a href="/orders/<c:out value="${order.id}"/>" class="btn btn-warning">Check</a><br><br>
                         </div>
                     </div></div>

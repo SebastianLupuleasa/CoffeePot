@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 <head>
@@ -42,7 +42,7 @@
             <div class="p-2 bd-highlight col-example text-center" style="<c:if test="${ingredient.stock <= 3}"> border: 4px solid yellow; </c:if>"><div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Name: <c:out value="${ingredient.name}"/></h5>
-                    <p class="card-text">Price: <c:out value="${ingredient.price}"/> $</p>
+                    <p class="card-text">Price: <fmt:formatNumber type="number" maxFractionDigits="2" value="${ingredient.price}"/> $</p>
                     <p class="card-text">Stock: <c:out value="${ingredient.stock}"/></p>
                     <a href="/addIngredient/<c:out value="${ingredient.id}"/>" class="btn btn-warning">Modify</a>
                     <a href="/admin/ingredients/<c:out value="${ingredient.id}"/>" class="btn btn-danger">Delete</a>

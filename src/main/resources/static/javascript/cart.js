@@ -40,3 +40,21 @@ $(document).on('click','.emptyCart', function() {
 $(document).ajaxStop(function(){
     window.location.reload();
 });
+
+$("#submit").click(function(){
+    $(".dialog").dialog('open');
+});
+
+function call()
+{
+ let deliver = prompt("What is the delivery method?\n1: to go\n2: pickup");
+
+ while(deliver!= 1 && deliver!=2)
+ {
+     alert("don't try to be funny!");
+     deliver = prompt("What is the delivery method?\n1: to-go\n2: pick-up");
+ }
+
+ return deliver;
+}
+

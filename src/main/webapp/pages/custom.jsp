@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <html lang="en">
 <head>
@@ -49,7 +51,7 @@
                             <p style="color: red;">Out of stock!</p>
                         </c:when>
                         <c:otherwise>
-                            <p class="card-text">Price: <c:out value="${coffee.price}"/> $</p>
+                            <p class="card-text">Price: <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.price}"/> $</p>
                             <button id="btnADD" onclick="coffeeSUB(<c:out value="${coffee.id}"/>)" class="btn btn-warning">-</button>
                             <input id='a<c:out value="${coffee.id}"/>' type="text" style="width: 60px; height: 40px; text-align: center;" value="1">
                             <button id="btnSUB" onclick="coffeeADD(<c:out value="${coffee.id}"/>)" class="btn btn-warning">+</button><br><br>

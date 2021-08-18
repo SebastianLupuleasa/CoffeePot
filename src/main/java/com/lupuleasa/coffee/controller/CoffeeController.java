@@ -406,20 +406,20 @@ public class CoffeeController {
         return mv;
     }
 
-    @GetMapping("admin/orders{id}")
-    public ModelAndView adminOrders(@PathVariable String id)
-    {
-        // For user details
-        Principal auth = SecurityContextHolder.getContext().getAuthentication();
-
-        ModelAndView mv = new ModelAndView();
-
-        mv.setViewName("order");
-        mv.addObject("order",purchaseRepo.getById(Integer.parseInt(id)));
-        mv.addObject("address",customerRepo.findAll());
-
-        return mv;
-    }
+//    @GetMapping("admin/orders{id}")
+//    public ModelAndView adminOrders(@PathVariable String id)
+//    {
+//        // For user details
+//        Principal auth = SecurityContextHolder.getContext().getAuthentication();
+//
+//        ModelAndView mv = new ModelAndView();
+//
+//        mv.setViewName("order");
+//        mv.addObject("order",purchaseRepo.getById(Integer.parseInt(id)));
+//        mv.addObject("address",customerRepo.findAll());
+//
+//        return mv;
+//    }
 
 
     @GetMapping("/orders")
@@ -446,6 +446,16 @@ public class CoffeeController {
         mv.setViewName("order");
         mv.addObject("order",purchaseRepo.getById(Integer.parseInt(id)));
         mv.addObject("address",customerRepo.findByUserName(auth.getName()).getAddress());
+
+        ArrayList<String> ingredients = new ArrayList<String>();
+
+        for(QuantifiedCoffee c : purchaseRepo.getById(Integer.parseInt(id)).getCoffees())
+        {
+            c.setName(c.getName().replaceAll("[0-9]", ""));
+            ingredients.add(c.getName());
+        }
+
+        mv.addObject("ingredients",ingredients);
 
         return mv;
     }
@@ -587,9 +597,9 @@ public class CoffeeController {
 
     }
 
-    @GetMapping("/makePurchase")
-    public void makePurchase()
-    {
+    @GetMapping("/makePurchase/{deliver}")
+    public void makePurchase(@PathVariable String deliver)
+        {
 
         // For user details
         Principal auth = SecurityContextHolder.getContext().getAuthentication();
@@ -610,8 +620,9 @@ public class CoffeeController {
          for(QuantifiedCoffee c : customerRepo.findByUserName(auth.getName()).getCart().getCoffees())
          {
              total = total+ c.getPrice() * c.getAmount();
+
              coffeeList.add(c);
-             c.setName("aa"+ (int)(Math.random()*(max-min+1)+min));
+             c.setName(c.getName() +(int)(Math.random()*(max-min+1)+min));
              c.setUid(-1);
              qcoffeRepo.save(c);
          }
@@ -620,7 +631,7 @@ public class CoffeeController {
         purchase.setCustomer(customerRepo.findByUserName(auth.getName()));
 
         purchase.setCoffees(coffeeList);
-
+        purchase.setDeliver(deliver);
 
       if(!coffeeList.isEmpty()) {
           purchaseRepo.save(purchase);
@@ -663,13 +674,21 @@ public class CoffeeController {
         return mv;
     }
 
-    @GetMapping("/checkout/{total}")
-    public ModelAndView verify(@PathVariable String total)
+    @GetMapping("/checkout/{total}/{deliver}")
+    public ModelAndView verify(@PathVariable String total, @PathVariable String deliver)
     {
 
 
         ModelAndView mv= new ModelAndView("checkout");
         mv.addObject("total",total);
+        if(deliver.equals("1"))
+        {
+            mv.addObject("great", "to-go");
+        }
+        else
+        {
+            mv.addObject("great", "pick-up");
+        }
 
         return mv;
     }

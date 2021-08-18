@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
   crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -31,8 +33,8 @@
     <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080';" alt=""/>
    
     <button type="button"  class="btn btn-danger emptyCart">Empty Cart</button>
-    <button type="button"  onclick="location.href = 'http://localhost:8080/checkout/${total}';" class="btn btn-success makePurchase">Make Purchase</button>
-     <h1>Total: ${total} $</h1>
+    <button type="button"  <c:if test="${total <= 0}"> disabled </c:if> onclick="let deliver=call(); location.href = 'http://localhost:8080/checkout/${total}/'+deliver;" class="btn btn-success makePurchase">Make Purchase</button>
+     <h1>Total: <fmt:formatNumber type="number" maxFractionDigits="2" value="${total}"/> $</h1>
 
     <div class="flex-menu">
         <c:forEach items="${coffeeList}" var="coffee">
@@ -42,7 +44,7 @@
                     <h5 class="card-title">Name: <c:out value="${coffee.name}"/></h5>
 
                     <p class="card-text">Quantity: <c:out value="${coffee.amount}"/></p>
-                    <p class="card-text">Total: <c:out value="${coffee.amount}"/> x <c:out value="${coffee.price}"/> $ = <c:out value="${coffee.price * coffee.amount}"/>  $</p>
+                    <p class="card-text">Total: <c:out value="${coffee.amount}"/> x <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.price}"/> $ =  <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.price * coffee.amount}"/>  $</p>
 
                     <button id="btnADD" onclick="coffeeSUB('<c:out value="${coffee.name}"/>')" class="btn btn-warning">-</button>
                     <input id='<c:out value="${coffee.name}"/>' type="text" style="width: 60px; height: 40px; text-align: center;" value="1">
@@ -52,6 +54,7 @@
             </div></div>
         </c:forEach>
     </div></div>
+
 
   </div>
 <script src="/javascript/cart.js"></script>

@@ -29,6 +29,16 @@ public class Purchase {
     @Column(name = "purchase_date")
     private Date createDate;
 
+    private String deliver;
+
+    public String getDeliver() {
+        return deliver;
+    }
+
+    public void setDeliver(String deliver) {
+        this.deliver = deliver;
+    }
+
     public int getId() {
         return id;
     }

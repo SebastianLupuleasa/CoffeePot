@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +12,6 @@
 
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/global.css" />
-  <script>
-
-    let value = ${total};
-
-  </script>
 
   <script src="https://js.stripe.com/v3/"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
@@ -37,11 +32,10 @@
   <img src="/images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
 
   <h1 style="color: goldenrod">Make your payment and finish your puchase!</h1>
-  <h2 style="color: gainsboro">You will be billed <span style="color: red"> ${total} </span> $! </h2>
-
+  <h2 style="color: gainsboro">You will be billed <span style="color: red"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${total}"/> </span> $! </h2>
+  <p id="weird" hidden>${great}</p>
   <div class="flex-menu">
-
-    <!-- Display a payment form -->
+        <!-- Display a payment form -->
     <form id="payment-form">
       <div id="card-element"><!--Stripe.js injects the Card Element--></div>
       <button id="submit">
@@ -60,6 +54,14 @@
 <p style="color:lightgray "> Default stripe card : 4242 4242 4242 4242</p>
 
 </div>
+
+<script>
+
+  let value = ${total};
+
+  let lpo = document.getElementById("weird").innerText;
+
+</script>
 
 <script src="/javascript/client.js"></script>
 

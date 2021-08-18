@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 <head>
@@ -27,13 +28,15 @@
     <div class="flex-menu">
         <div class="container-sm">
        Id: ${order.id}<br>
-       Amount: ${order.amount} $<br>
+       Amount: <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.amount}"/>  $<br>
        Purchase Date: ${order.createDate}<br>
        Address: Strada: ${address.streetName}, Numarul: ${address.buildingNumber}<br>
-       Items:
-            <c:forEach items="${order.coffees}" var="coffee">
-                <p class="card-text"> <c:out value="${coffee.amount}"/> x <c:out value="${coffee.name}"/> = <c:out value="${coffee.price * coffee.amount}"/> $ </p>
-               </c:forEach>
+       Deliver Mehod: ${order.deliver}<br>
+        <c:forEach items="${order.coffees}" var="coffee">
+            <c:forEach items="${ingredients}" var="ingredient">
+                       <p class="card-text"> <c:out value="${coffee.amount}"/> x <c:out value="${ingredient}"/> = <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.amount * coffee.price}"/> $ </p>
+            </c:forEach>
+            </c:forEach>
         </div>
     </div>
 </div>

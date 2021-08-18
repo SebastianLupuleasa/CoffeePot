@@ -5,7 +5,6 @@ var stripe = Stripe("pk_test_51JP6kmINUlu2ACQuUmOe2ugiqYPQrtwrbSyd0XIaXm0fWBM8IJ
 var purchase = {
   items: [{ id: "xl-tshirt" }]
 };
-
 // Disable the button until we have Stripe set up on the page
 document.querySelector("button").disabled = true;
 fetch("/create-payment-intent/"+value, {
@@ -50,8 +49,9 @@ fetch("/create-payment-intent/"+value, {
 
       var form = document.getElementById("payment-form");
       form.addEventListener("submit", function(event) {
-        event.preventDefault();
+         event.preventDefault();
         // Complete payment when the submit button is clicked
+
         payWithCard(stripe, card, data.clientSecret);
       });
     });
@@ -60,7 +60,8 @@ fetch("/create-payment-intent/"+value, {
 // If the card requires authentication Stripe shows a pop-up modal to
 // prompt the user to enter authentication details without leaving your page.
 var payWithCard = function(stripe, card, clientSecret) {
-  loading(true);
+      loading(true);
+
   stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -75,9 +76,10 @@ var payWithCard = function(stripe, card, clientSecret) {
         } else {
           // The payment succeeded!
           orderComplete(result.paymentIntent.id);
-        $.ajax({
+
+          $.ajax({
         type: "GET",
-        url: "/makePurchase",
+        url: "/makePurchase/"+lpo,
         data: {
         },success() {
             alert("purchase made!");
@@ -87,9 +89,9 @@ var payWithCard = function(stripe, card, clientSecret) {
                 data: {
                 },
             });
-            window.location.replace('http://localhost:8080');
+                     window.location.replace('http://localhost:8080');
         }
-    });
+        });
         }
       });
 };
