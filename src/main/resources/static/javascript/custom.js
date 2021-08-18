@@ -57,6 +57,7 @@ $(document).on('click','.pickBtn', function() {
     });
 });
 
+
 function coffeeSUB(variable)
 {
     if(document.getElementById("a"+variable).value > 1)

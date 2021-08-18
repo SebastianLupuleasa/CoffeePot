@@ -31,7 +31,7 @@
     <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080';" alt=""/>
    
     <button type="button"  class="btn btn-danger emptyCart">Empty Cart</button>
-    <button type="button"  class="btn btn-success makePurchase">Make Purchase</button>
+    <button type="button"  onclick="location.href = 'http://localhost:8080/checkout/${total}';" class="btn btn-success makePurchase">Make Purchase</button>
      <h1>Total: ${total} $</h1>
 
     <div class="flex-menu">

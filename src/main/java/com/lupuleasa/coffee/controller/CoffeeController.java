@@ -6,6 +6,7 @@ import com.lupuleasa.coffee.services.CheckStockService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -221,6 +222,7 @@ public class CoffeeController {
 
         return mv;
     }
+
 
     @PostMapping("addCustomer")
     public ModelAndView addCustomer(String customerName, String customerPass, String customerStreet, String customerNumber,String customerRole)
@@ -595,6 +597,10 @@ public class CoffeeController {
         Cart cart = new Cart();
         Purchase purchase = new Purchase();
 
+        int min = 2500;
+        int max = 100000000;
+
+
         cart = customerRepo.findByUserName(auth.getName()).getCart();
 
          float total=0;
@@ -605,6 +611,7 @@ public class CoffeeController {
          {
              total = total+ c.getPrice() * c.getAmount();
              coffeeList.add(c);
+             c.setName("aa"+ (int)(Math.random()*(max-min+1)+min));
              c.setUid(-1);
              qcoffeRepo.save(c);
          }
@@ -655,4 +662,18 @@ public class CoffeeController {
 
         return mv;
     }
+
+    @GetMapping("/checkout/{total}")
+    public ModelAndView verify(@PathVariable String total)
+    {
+
+
+        ModelAndView mv= new ModelAndView("checkout");
+        mv.addObject("total",total);
+
+        return mv;
+    }
+
+
 }
+

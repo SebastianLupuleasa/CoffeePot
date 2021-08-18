@@ -16,6 +16,8 @@ public class Ingredient {
     private float price;
     private int stock=10;
 
+    @ManyToMany(mappedBy = "ingredients")
+    private List<Recipe> recipes;
 
     public List<Recipe> getRecipes() {
         return recipes;
@@ -24,9 +26,6 @@ public class Ingredient {
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
     }
-
-    @ManyToMany(mappedBy = "ingredients")
-    private List<Recipe> recipes;
 
     public int getId() {
         return id;

@@ -38,6 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/addCustomer").hasAnyRole("ADMIN")
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/checkout").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/checkout/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/create-payment-intent").hasAnyRole("ADMIN", "USER")
                 .and().formLogin();
 
         http.csrf().disable();

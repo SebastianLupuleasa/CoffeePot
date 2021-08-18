@@ -18,6 +18,11 @@ public class QuantifiedCoffee{
     @ManyToMany(mappedBy = "coffees")
     private List<Purchase> purchases;
 
+
+    @ManyToMany(mappedBy = "coffees")
+    private List<Cart> carts;
+
+
     public List<Purchase> getPurchases() {
         return purchases;
     }
@@ -66,8 +71,6 @@ public class QuantifiedCoffee{
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "coffees")
-    private List<Cart> carts;
 
     public int getAmount() {
         return amount;

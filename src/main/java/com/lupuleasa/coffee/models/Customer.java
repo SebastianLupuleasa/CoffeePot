@@ -18,14 +18,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Coffee> custom_coffees;
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
-
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
     @OneToMany(mappedBy = "customer")
     private List<Purchase> purchases;
 
@@ -36,6 +28,15 @@ public class Customer {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cart", referencedColumnName = "id")
     private Cart cart;
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
 
     public int getId() {
         return id;
