@@ -25,19 +25,18 @@
     <img src="/images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
 
 
-    <div class="flex-menu">
+   <div class="flex-menu">
         <div class="container-sm">
        Id: ${order.id}<br>
        Amount: <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.amount}"/>  $<br>
        Purchase Date: ${order.createDate}<br>
        Address: Strada: ${address.streetName}, Numarul: ${address.buildingNumber}<br>
        Deliver Mehod: ${order.deliver}<br>
-        <c:forEach items="${order.coffees}" var="coffee">
-            <c:forEach items="${ingredients}" var="ingredient">
-                       <p class="card-text"> <c:out value="${coffee.amount}"/> x <c:out value="${ingredient}"/> = <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.amount * coffee.price}"/> $ </p>
-            </c:forEach>
-            </c:forEach>
+        <c:forEach items="${order.coffees}" var="coffee" varStatus="loop">
+     <p class="card-text"> <c:out value="${coffee.amount}"/> x <c:out value="${ingredients[loop.index]}"/> = <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.amount * coffee.price}"/> $ </p>
+        </c:forEach>
         </div>
+    </div>
     </div>
 </div>
 </body>
