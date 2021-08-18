@@ -44,6 +44,12 @@ Your Shopping Cart:
 ![shoppingCart](https://user-images.githubusercontent.com/73706879/129729242-c1c5f356-8cd6-408a-9d24-56c57fca9855.PNG)
 
 
+Pay in a modern way:
+
+
+![paycard](https://user-images.githubusercontent.com/73706879/129936904-0750ad7c-2835-416f-8f69-fbc851960cf7.PNG)
+
+
 Your Orders:
 
 
