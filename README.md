@@ -5,7 +5,7 @@ An coffee shop project made in Spring Boot for Endava as Summer Practice!
 Database diagram:
 
 
-![Untitled Diagram](https://user-images.githubusercontent.com/73706879/129975366-b3b0bb7c-a452-4ba3-b2f0-24effb3e3d69.png)
+![output-onlinepngtools](https://user-images.githubusercontent.com/73706879/129975823-a4057be7-9eb6-4cd1-8c38-810629916d13.png)
 
 
 Login Page:
