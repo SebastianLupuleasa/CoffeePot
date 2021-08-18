@@ -29,7 +29,7 @@
     <br>
     <br>
 
-    <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
+    <img src="images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
 
     <div class="flex-menu">
  <c:forEach items="${coffeeList}" var="coffee">

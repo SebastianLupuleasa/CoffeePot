@@ -30,10 +30,10 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080';" alt=""/>
+    <img src="/images/home-logo.png" onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
    
     <button type="button"  class="btn btn-danger emptyCart">Empty Cart</button>
-    <button type="button"  <c:if test="${total <= 0}"> disabled </c:if> onclick="let deliver=call(); location.href = 'http://localhost:8080/checkout/${total}/'+deliver;" class="btn btn-success makePurchase">Make Purchase</button>
+    <button type="button"  <c:if test="${total <= 0}"> disabled </c:if> onclick="let deliver=call(); location.href = 'https://endava-coffeepot.herokuapp.com/checkout/${total}/'+deliver;" class="btn btn-success makePurchase">Make Purchase</button>
      <h1>Total: <fmt:formatNumber type="number" maxFractionDigits="2" value="${total}"/> $</h1>
 
     <div class="flex-menu">

@@ -29,9 +29,9 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080/admin';" alt=""/>
+    <img src="/images/home-logo.png" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/admin';" alt=""/>
 
-    <button type="button" onclick="location.href = 'http://localhost:8080/addCustomer';" class="btn btn-success createCoffee">Add Customer</button>
+    <button type="button" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/addCustomer';" class="btn btn-success createCoffee">Add Customer</button>
 
     <div class="flex-menu">
         <c:forEach items="${customerList}" var="customer">

@@ -29,7 +29,7 @@
     <br>
     <br>
 
-    <img class="logo" src="/images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
+    <img class="logo" src="/images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
 
     <form id="customCoffee" action="addCustom" method="post" >
         <div class="row">

@@ -25,7 +25,7 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080/admin';" alt=""/>
+    <img src="/images/home-logo.png" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/admin';" alt=""/>
    
     <br>
     <br>

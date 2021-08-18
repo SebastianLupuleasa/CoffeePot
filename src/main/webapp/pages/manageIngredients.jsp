@@ -29,9 +29,9 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png" onclick="location.href = 'http://localhost:8080/admin';" alt=""/>
+    <img src="/images/home-logo.png" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/admin';" alt=""/>
 
-    <button type="button" onclick="location.href = 'http://localhost:8080/addIngredient';" class="btn btn-success createCoffee">Add Ingredient</button>
+    <button type="button" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/addIngredient';" class="btn btn-success createCoffee">Add Ingredient</button>
     <br>
 
     <c:if test="${status.equals(true)}"><h1 style="color: yellow;">Your stock on some ingredients is running low....</h1></c:if>
