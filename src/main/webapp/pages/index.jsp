@@ -16,7 +16,7 @@
 <div class="bg-image"></div>
 
 <div class="bg-text">
-    <c:if test="${status.equals('ROLE_ADMIN')}"><button id="adminBtn" type="button" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/admin';" class="btn btn-success createCoffee logoutBtn" style="float:left; margin-left:0%;">Admin panel</button></c:if>
+    <c:if test="${status.equals('ROLE_ADMIN')}"><button id="adminBtn" type="button" onclick="location.href = 'http://localhost:8080/admin';" class="btn btn-success createCoffee logoutBtn" style="float:left; margin-left:0%;">Admin panel</button></c:if>
 
 
 
@@ -29,7 +29,7 @@
 
 
 
-    <img src="images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
+    <img src="images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
 
     <c:if test="${status.equals('ROLE_ADMIN') && stockStatus.equals(true)}"><h1 style="color: yellow;">Your stock on some ingredients is running low....</h1></c:if>
 

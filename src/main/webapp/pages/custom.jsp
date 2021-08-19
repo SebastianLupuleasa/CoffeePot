@@ -30,9 +30,9 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
+    <img src="/images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
    
-    <button type="button" onclick="location.href = 'https://endava-coffeepot.herokuapp.com/addCustom';" class="btn btn-success createCoffee">Create Coffee</button>
+    <button type="button" onclick="location.href = 'http://localhost:8080/addCustom';" class="btn btn-success createCoffee">Create Coffee</button>
 
     <div class="flex-menu">
         <c:forEach items="${coffeeList}" var="coffee">

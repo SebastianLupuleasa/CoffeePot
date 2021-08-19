@@ -25,7 +25,7 @@
     <br>
     <br>
 
-    <img src="/images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com/admin';" alt=""/>
+    <img src="/images/home-logo.png"  onclick="location.href = 'http://localhost:8080/admin';" alt=""/>
 
     <h1 style="color: chartreuse">Profit for today: <c:out value='${total}'/> $</h1>
 

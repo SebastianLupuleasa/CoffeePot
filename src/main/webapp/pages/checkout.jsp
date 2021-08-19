@@ -29,7 +29,7 @@
 <div class="bg-text">
 
 
-  <img src="/images/home-logo.png"  onclick="location.href = 'https://endava-coffeepot.herokuapp.com';" alt=""/>
+  <img src="/images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
 
   <h1 style="color: goldenrod">Make your payment and finish your puchase!</h1>
   <h2 style="color: gainsboro">You will be billed <span style="color: red"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${total}"/> </span> $! </h2>
