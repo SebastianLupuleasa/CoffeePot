@@ -25,7 +25,7 @@
     <img src="/images/home-logo.png"  onclick="location.href = 'http://localhost:8080';" alt=""/>
 
 
-    <div class="flex-menu">
+   <div class="flex-menu">
         <div class="container-sm">
        Id: ${order.id}<br>
        Amount: <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.amount}"/>  $<br>
@@ -36,6 +36,7 @@
      <p class="card-text"> <c:out value="${coffee.amount}"/> x <c:out value="${ingredients[loop.index]}"/> = <fmt:formatNumber type="number" maxFractionDigits="2" value="${coffee.amount * coffee.price}"/> $ </p>
         </c:forEach>
         </div>
+    </div>
     </div>
 </div>
 </body>
