@@ -6,8 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CoffeeApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+	// tests are in repositories folder
 
 }

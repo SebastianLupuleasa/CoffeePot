@@ -28,6 +28,7 @@
    <div class="flex-menu">
         <div class="container-sm">
        Id: ${order.id}<br>
+       Customer: ${order.customer.userName} <br>
        Amount: <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.amount}"/>  $<br>
        Purchase Date: ${order.createDate}<br>
        Address: Strada: ${address.streetName}, Numarul: ${address.buildingNumber}<br>

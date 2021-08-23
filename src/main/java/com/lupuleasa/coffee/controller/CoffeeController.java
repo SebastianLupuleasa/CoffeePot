@@ -445,8 +445,9 @@ public class CoffeeController {
 
         mv.setViewName("order");
         mv.addObject("order",purchaseRepo.getById(Integer.parseInt(id)));
-        mv.addObject("address",customerRepo.findByUserName(auth.getName()).getAddress());
+        mv.addObject("address",customerRepo.findByUserName(purchaseRepo.getById(Integer.parseInt(id)).getCustomer().getUserName()).getAddress());
 
+        
         ArrayList<String> ingredients = new ArrayList<String>();
 
         for(QuantifiedCoffee c : purchaseRepo.getById(Integer.parseInt(id)).getCoffees())
